@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { pluck } from 'rxjs/operators';
 import { User } from './model/user.interface';
 import { Observable } from 'rxjs';
-import { ResourcesService } from '../../shared/resource.service';
 import { HttpClient } from '@angular/common/http';
+import { ResourceService } from '../shared/resource.service';
 
 @Component({
 	selector: 'app-user',
@@ -17,9 +17,9 @@ export class UserComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private http: HttpClient,
-		private resourcesService: ResourcesService
+		private resourceService: ResourceService
 	) {
-		this.users$ = this.resourcesService.getResource<User>(this.urlUsers);
+		this.users$ = this.resourceService.getResource<User>(this.urlUsers);
 	}
 
 	ngOnInit() {}

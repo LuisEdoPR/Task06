@@ -6,25 +6,30 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { Router, RouterModule } from '@angular/router';
-import { TransfersModule } from './transfers/transfers.module';
-import { TransferComponent } from './transfers/transfer/transfer.component';
 import { AuthenticacionGuard } from './authentication-guard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { SignUpComponent } from './authentication/sign-up/sign-up.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { UserModule } from './user/user.module';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 @NgModule({
-	declarations: [ AppComponent ],
+	declarations: [ AppComponent, LoginComponent, SignUpComponent, NotFoundComponent ],
 	imports: [
 		BrowserModule,
-		TransfersModule,
 		HttpClientModule,
 		SharedModule,
 		RouterModule.forRoot([
-			{ path: '', component: TransferComponent },
+			{ path: '', redirectTo: '/authentication', pathMatch: 'full' },
+			{ path: 'authentication', component: LoginComponent },
+			{ path: 'authentication/signup', component: SignUpComponent },
 			{
-				path: 'authentication',
-				loadChildren: '../app/authentication/authentication.module#AuthenticationModule',
+				path: 'user',
+				loadChildren: '../app/user/user.module#UserModule',
 				canLoad: [ AuthenticacionGuard ]
-			}
+			},
+			{ path: '**', component: NotFoundComponent }
 		]),
 		BrowserAnimationsModule
 	],

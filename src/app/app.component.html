@@ -1,5 +1,13 @@
-<a [routerLink]="'authentication'">Authentication</a> - -
-<a [routerLink]="'authentication/user'">User</a> - -
-<a [routerLink]="'authentication/signup'">Sign Up</a>
+<button mat-raised-button
+        color="primary"
+        [routerLink]="'authentication'">Authentication</button> &nbsp;&nbsp;
+<button mat-raised-button
+        color="primary"
+        *ngIf='isLogged()'
+        [routerLink]="'authentication/signup'">Sign Up</button> &nbsp;&nbsp;
+<button mat-raised-button
+        color="primary"
+        [routerLink]="'user'"
+        *ngIf='isLogged()'>User</button> &nbsp;&nbsp;
 
 <router-outlet></router-outlet>
